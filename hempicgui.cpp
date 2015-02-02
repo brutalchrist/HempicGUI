@@ -176,7 +176,7 @@ void HempicGUI::asignarFechaGUI()
 }
 
 
-void HempicGUI::dedicacionInsertarActualizar(QString id, QString proyecto, int bloque, QString comentario)
+void HempicGUI::dedicacionInsertarActualizar(QString id, QString proyecto, int bloque)
 {
     QString queryString = "select * from dedicaciones where id='" + id + "'";
 
@@ -197,7 +197,7 @@ void HempicGUI::dedicacionInsertarActualizar(QString id, QString proyecto, int b
                         id +"', '"+
                         convertirFecha(fechaActual) +"', '"+
                         QString::number(bloque) +"', '"+
-                        comentario +"', '"+
+                        "" +"', '"+
                         proyecto +"', '"+
                         QString::number(idUsuario) +"')";
 
@@ -209,6 +209,43 @@ void HempicGUI::dedicacionInsertarActualizar(QString id, QString proyecto, int b
             }
         }
     }
+
+}
+
+void HempicGUI::insertarActualizarComentario(QString id, QString comentario, int bloque)
+{
+    QString queryString = "select * from dedicaciones where id='" + id + "'";
+
+    if(database.isOpen()) {
+        QSqlQuery query;
+
+       if(query.exec(queryString.toLatin1())) {
+            if(query.next()) {
+                QString actualizar = "update dedicaciones set comentario='" + comentario + "' where id='" + id + "'";
+
+                if(query.exec(actualizar.toLatin1())) {
+                    this->setStatusTip("Dedicación guadada");
+                } else {
+                    this->setStatusTip("Error al guardar Dedicación");
+                }
+            } else {
+                QString insertar = "insert into dedicaciones values ('"+
+                        id +"', '"+
+                        convertirFecha(fechaActual) +"', '"+
+                        QString::number(bloque) +"', '"+
+                        comentario +"', '"+
+                        "" +"', '"+
+                        QString::number(idUsuario) +"')";
+
+                if(query.exec(insertar.toLatin1())) {
+                    this->setStatusTip("Dedicación guadada");
+                } else {
+                    this->setStatusTip("Error al guardar Dedicación");
+                }
+            }
+        }
+    }
+
 
 }
 
@@ -339,119 +376,159 @@ void HempicGUI::on_cambiarFechaBoton_clicked()
 void HempicGUI::on_periodo1Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p1");
-    dedicacionInsertarActualizar(id, arg1, 1, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 1);
 }
 
 void HempicGUI::on_periodo2Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p2");
-    dedicacionInsertarActualizar(id, arg1, 2, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 2);
 }
 
 void HempicGUI::on_periodo3Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p3");
-    dedicacionInsertarActualizar(id, arg1, 3, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 3);
 }
 
 void HempicGUI::on_periodo4Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p4");
-    dedicacionInsertarActualizar(id, arg1, 4, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 4);
 }
 
 void HempicGUI::on_periodo5Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p5");
-    dedicacionInsertarActualizar(id, arg1, 5, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 5);
 }
 
 void HempicGUI::on_periodo6Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p6");
-    dedicacionInsertarActualizar(id, arg1, 6, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 6);
 }
 
 void HempicGUI::on_periodo7Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p7");
-    dedicacionInsertarActualizar(id, arg1, 7, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 7);
 }
 
 void HempicGUI::on_periodo8Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p8");
-    dedicacionInsertarActualizar(id, arg1, 8, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 8);
 }
 
 void HempicGUI::on_periodo9Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p9");
-    dedicacionInsertarActualizar(id, arg1, 9, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 9);
 }
 
 void HempicGUI::on_periodo10Combo_activated(const QString &arg1)
 {
     QString id = QString(convertirFecha(fechaActual)+"-p10");
-    dedicacionInsertarActualizar(id, arg1, 10, obtenerComentario(id));
+    dedicacionInsertarActualizar(id, arg1, 10);
 }
 
 void HempicGUI::on_comentarioP1_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p1");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 1);
 }
 
 void HempicGUI::on_comentarioP2_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p2");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 2);
 }
 
 void HempicGUI::on_comentarioP3_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p3");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 3);
 }
 
 void HempicGUI::on_comentarioP4_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p4");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 4);
 }
 
 void HempicGUI::on_toolButton_5_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p5");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 5);
 }
 
 void HempicGUI::on_comentarioP6_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p6");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 6);
 }
 
 void HempicGUI::on_comentarioP7_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p7");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 7);
 }
 
 void HempicGUI::on_comentarioP8_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p8");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 8);
 }
 
 void HempicGUI::on_comentarioP9_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p9");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 9);
 }
 
 void HempicGUI::on_comentarioP10_clicked()
 {
     QString id = QString(convertirFecha(fechaActual)+"-p10");
-    qDebug() << obtenerComentario(id);
+    bool ok = false;
+    QString comentario = QInputDialog::getText(
+                this, "Comentario", "Inserte comentario", QLineEdit::Normal, obtenerComentario(id), &ok);
+    if(ok && !comentario.isEmpty())
+        insertarActualizarComentario(id, comentario, 10);
 }

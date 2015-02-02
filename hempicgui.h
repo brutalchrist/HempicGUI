@@ -7,6 +7,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QFile>
+#include <QInputDialog>
 
 namespace Ui {
 class HempicGUI;
@@ -25,7 +26,8 @@ public:
     QString comentario;
 
 private slots:
-    void dedicacionInsertarActualizar(QString id, QString proyecto, int bloque, QString comentario);
+    void dedicacionInsertarActualizar(QString id, QString proyecto, int bloque);
+    void insertarActualizarComentario(QString id, QString comentario, int bloque);
     void llenarCombosProyectos();
     void asignarFechaGUI();
 
