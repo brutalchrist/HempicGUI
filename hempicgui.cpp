@@ -60,7 +60,7 @@ void HempicGUI::llenarCombosProyectos()
         QSqlQuery query;
 
         if(query.exec("select * from proyectos")) {
-            if(query.next()) {
+            while(query.next()) {
                 listaProyectos.append(query.value(2).toString());
             }
         }
