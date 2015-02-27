@@ -8,6 +8,7 @@
 #include <QSqlDatabase>
 #include <QFile>
 #include <QInputDialog>
+#include <QTextCodec>
 
 namespace Ui {
 class HempicGUI;

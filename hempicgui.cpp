@@ -10,6 +10,10 @@ HempicGUI::HempicGUI(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    /* Codificación */
+    QTextCodec *linuxCodec = QTextCodec::codecForName("UTF-8");
+    QTextCodec::setCodecForLocale(linuxCodec);
+
     /* Ventana sin resize */
     this->statusBar()->setSizeGripEnabled(false);
     this->setWindowFlags((this->windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowMaximizeButtonHint);
@@ -35,7 +39,7 @@ HempicGUI::HempicGUI(QWidget *parent) :
     }
 
     database.setDatabaseName(QDir::homePath()+CONF_DIR+DB_NAME);
-    //database.setConnectOptions("ISC_DPB_LC_CTYPE=Latin1");
+    database.setConnectOptions("ISC_DPB_LC_CTYPE=Latin1");
 
     if(database.open())
         qDebug() << "DB OK";
