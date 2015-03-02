@@ -1,4 +1,5 @@
 #include "hempicgui.h"
+#include "cambiarfecha.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

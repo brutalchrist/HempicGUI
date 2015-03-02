@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QInputDialog>
 #include <QTextCodec>
+#include "cambiarfecha.h"
 
 namespace Ui {
 class HempicGUI;
@@ -25,6 +26,10 @@ public:
     QSqlDatabase database;
     int idUsuario;
     QString comentario;
+    CambiarFecha dialogoFecha;
+
+public slots:
+    void setFechaActual(QDateTime fecha);
 
 private slots:
     void dedicacionInsertarActualizar(QString id, QString proyecto, int bloque);

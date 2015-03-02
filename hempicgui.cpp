@@ -372,9 +372,19 @@ QString HempicGUI::obtenerComentario(QString id)
 
 /*** Eventos ***/
 
+void HempicGUI::setFechaActual(QDateTime fecha)
+{
+    this->fechaActual = fecha;
+}
+
 void HempicGUI::on_cambiarFechaBoton_clicked()
 {
-    // Levantar Popup calendario
+    dialogoFecha.setFecha(fechaActual);
+    dialogoFecha.exec();
+    fechaActual = dialogoFecha.getFecha();
+
+    asignarFechaGUI();
+    llenarCombosProyectos();
 }
 
 void HempicGUI::on_periodo1Combo_activated(const QString &arg1)

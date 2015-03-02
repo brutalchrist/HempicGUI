@@ -2,6 +2,7 @@
 #define CAMBIARFECHA_H
 
 #include <QDialog>
+#include <QDateTime>
 
 namespace Ui {
 class CambiarFecha;
@@ -14,6 +15,14 @@ class CambiarFecha : public QDialog
 public:
     explicit CambiarFecha(QWidget *parent = 0);
     ~CambiarFecha();
+    QDateTime fecha;
+
+public slots:
+    QDateTime getFecha();
+    void setFecha(QDateTime fechaCambiar);
+
+private slots:
+    void on_buttonBox_accepted();
 
 private:
     Ui::CambiarFecha *ui;

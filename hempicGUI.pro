@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        hempicgui.cpp
+        hempicgui.cpp \
+    cambiarfecha.cpp
 
-HEADERS  += hempicgui.h
+HEADERS  += hempicgui.h \
+    cambiarfecha.h
 
-FORMS    += hempicgui.ui
+FORMS    += hempicgui.ui \
+    cambiarfecha.ui
 
 RESOURCES += \
     resources.qrc
