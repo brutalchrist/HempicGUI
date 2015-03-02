@@ -80,6 +80,17 @@ void HempicGUI::llenarCombosProyectos()
         ui->periodo9Combo->addItems(listaProyectos);
         ui->periodo10Combo->addItems(listaProyectos);
 
+        ui->periodo1Combo->setCurrentIndex(0);
+        ui->periodo2Combo->setCurrentIndex(0);
+        ui->periodo3Combo->setCurrentIndex(0);
+        ui->periodo4Combo->setCurrentIndex(0);
+        ui->periodo5Combo->setCurrentIndex(0);
+        ui->periodo6Combo->setCurrentIndex(0);
+        ui->periodo7Combo->setCurrentIndex(0);
+        ui->periodo8Combo->setCurrentIndex(0);
+        ui->periodo9Combo->setCurrentIndex(0);
+        ui->periodo10Combo->setCurrentIndex(0);
+
         if(query.exec("select * from dedicaciones where fecha='" + convertirFecha(fechaActual) + "'")) {
             while(query.next()) {
                 switch (query.value(2).toString().toInt()) {
