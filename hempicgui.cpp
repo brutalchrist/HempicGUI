@@ -69,6 +69,8 @@ void HempicGUI::llenarCombosProyectos()
             }
         }
 
+        limpiarCombosProyectos();
+
         ui->periodo1Combo->addItems(listaProyectos);
         ui->periodo2Combo->addItems(listaProyectos);
         ui->periodo3Combo->addItems(listaProyectos);
@@ -180,6 +182,20 @@ void HempicGUI::llenarCombosProyectos()
             }
         }
     }
+}
+
+void HempicGUI::limpiarCombosProyectos()
+{
+    ui->periodo1Combo->clear();
+    ui->periodo2Combo->clear();
+    ui->periodo3Combo->clear();
+    ui->periodo4Combo->clear();
+    ui->periodo5Combo->clear();
+    ui->periodo6Combo->clear();
+    ui->periodo7Combo->clear();
+    ui->periodo8Combo->clear();
+    ui->periodo9Combo->clear();
+    ui->periodo10Combo->clear();
 }
 
 void HempicGUI::asignarFechaGUI()

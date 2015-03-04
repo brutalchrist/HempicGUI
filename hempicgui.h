@@ -36,6 +36,7 @@ private slots:
     void insertarActualizarComentario(QString id, QString comentario, int bloque);
     void llenarCombosProyectos();
     void asignarFechaGUI();
+    void limpiarCombosProyectos();
 
     /*Utils*/
     QString obtenerMes(int mes);
